@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search hotels</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .paymentinfo
+        {
+            background-color: #5DA7DB;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><h4>Travel & Stay</h4></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchflights">Book flights</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchhotels">Book hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchflights" onclick="setdouble()">Flights + hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="viewcart">My cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="mybookings">My bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="feedback">Give feedback</a>
+                    </li>
+                    
+                    
+                </ul>
+                <span class="align-middle mr-2">
+                    <a class="nav-link active" href="editprofile">
+                        <h1 class="display-4 fs-5 text-center ">Welcome, <%= user.username %> ✈️ <%= user.mileage %> miles&nbsp; </h1>
+                    </a>
+                </span>
+                    <a href="logout">
+                        <button class="btn btn-warning  ml-2" type="submit">Log out</button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div> 
+
+    <div class="container-fluid mt-1">
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <div class="row justify-content-center">
+                    <div class="col-2">
+                            <a class="text-decoration-none" href="searchflights">
+                                <button class="btn  btn-outline-primary"><h4 class="m-0 p-1">Flights</h4></button>
+                            </a>
+                        </div>
+                        <div class="col-2">
+                            <a class="text-decoration-none" href="searchhotels">
+                                <button class="btn btn btn-success"><h4 class="m-0 p-1">Hotels</h4></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+       
+    <div class="container-fluid mt-2">
+
+        <div class="row justify-content-center">
+            
+            <div class="col-12">
+                <div class="card bg-light mx-auto">
+                    <div class="card-body">
+                        <form method = "post" action="searchhotels">
+                        <div class="row">
+                            
+                            <div class="col-2 m-2 mt-0">
+                                <div class="row text-left">
+                                    <label for="user_name" class="form-label"><h4>City</h4></label>
+                                    <input class="form-control me-2" type="search" placeholder="Enter city name" aria-label="Departure city" id="city" name="city" value="<%= city %>" required>
+                                </div>
+                            </div>
+                            <div class="col-2 m-2 mt-0">
+                                <div class="row text-left">
+                                    <label for="user_name" class="form-label"><h4>Country</h4></label>
+                                    <input class="form-control me-2" type="search" placeholder="Enter country name" aria-label="Destination city" id="country" name="country" value="<%= country %>" required>
+                                </div>
+                            </div>
+                            <div class="col-2 m-2 mt-0">
+                                <div class="row text-left">
+                                    <label for="user_name" class="form-label"><h4>Check-in</h4></label>
+                                    <input class="form-control me-2" type="date" placeholder="Date of check-in" aria-label="Date of travel" id="check_in" name="check_in" onchange="getTravelDate()" value="<%= check_in %>" required>
+                                </div>
+                            </div>
+                            <div class="col-2 m-2 mt-0">
+                                <div class="row text-left">
+                                    <label for="user_name" class="form-label"><h4>Check-out</h4></label>
+                                    <input class="form-control me-2" type="date" placeholder="Date of check-out" aria-label="Date of travel" id="check_out" name="check_out" onchange="getReturnDate()" value="<%= check_out %>" required>
+                                </div>
+                            </div>
+                            <div class="col-1 m-2 mt-0">
+                                <div class="row text-left">
+                                    <label for="user_name" class="form-label"><h4>People</h4></label>
+                                    <input class="form-control me-2" type="number" placeholder="" aria-label="number_of_travellers" value="<%= people %>" id="people" name="people" onchange="checkPeopleNumber()" required>
+                                </div>
+                            </div>
+                            <div class="col-2 m-2 mt-0">
+                                <div class="row text-left">
+                                    <label for="exampleDataList" class="form-label"><h4>Preference</h4></label>
+                                    <select class="form-select" aria-label="Default select example" onchange="getPreference()" id="selection" name="selection" value="<%= preference %>" required>
+                                        <option value="" selected>Choose class</option>
+                                        <% if(preference == 1) { %>
+                                            <option value="1" selected>Suite</option>
+                                        <% } %>
+                                        <% if(preference != 1) { %>
+                                            <option value="1">Suite</option>
+                                        <% } %>
+                                        <% if(preference == 2) { %>
+                                            <option value="2" selected>Room</option>
+                                        <% } %>
+                                        <% if(preference != 2) { %>
+                                            <option value="2">Room</option>
+                                        <% } %>
+                                      </select>
+                                </div>
+                            </div>
+                        </div>   
+                                                
+                        <div class="row text-center">
+                            <div id="sender">
+                                <button type="submit" class="btn btn-success mt-2 my-auto" id="button" ><h5>Search</h5></button>
+                            </div>
+                        </div>  
+                            
+                        </form>
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="container justify-content-center mt-5">
+        <% for(var i=0; i < search_results.length; i++) { %>
+
+        <div class="row mb-2 justify-content-center">
+            <div class="col-8 text-center">
+               
+                <div class="card" style="max-width: 760px;">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <% if(search_results[i].type == 'suite') { %>
+                        <img src="suit.jpg" class="img-fluid rounded-start" alt="..." width = "100%" height="100%">
+                        <% } %>
+                        <% if(search_results[i].type == 'room') { %>
+                            <img src="room.jpg" class="img-fluid rounded-start" alt="..." width = "100%" height="100%">
+                        <% } %>
+                      </div>
+                      <div class="col-md-4 m-0 mt-2">
+                          <h5 class="card-title" name="hotel_name"><%= search_results[i].hotel_name %></h5>
+                          <p class="card-text" name="roomName"><%= search_results[i].name %></p>
+                          <p class="card-text p-0" name="amenities"><%= search_results[i].amenities %></p>
+                          <p class="card-text p-0 mb-1" name="city"><small class="text-muted"><%= search_results[i].city.charAt(0).toUpperCase() + search_results[i].city.slice(1) %></small></p>
+                          <p class="card-text p-0 m-0" name="price">Price: $ <%= search_results[i].price %></p>
+                      </div>
+                      <div class="col-md-3 mt-4">
+                        <div class="row mb-1 p-4">
+                            <form method="post" action="book_room_from_cart">
+                                    <input type="hidden" id="roomId" name="roomId" value = "<%= search_results[i].roomId %>"/>
+                                    <input type="hidden" id="roomName" name="roomName" value = "<%= search_results[i].name %>"/>
+                                    <input type="hidden" id="hotelId" name="hotelId" value = "<%= search_results[i].hotelId %>"/>
+                                    <input type="hidden" id="hotel_name" name="hotel_name" value = "<%= search_results[i].hotel_name %>"/>
+                                    <input type="hidden" id="type" name="type" value = "<%= search_results[i].type %>"/>
+
+                                    <input type="hidden" id="check_in_date" name="check_in_date" value = "<%= check_in %>"/>
+                                    <input type="hidden" id="check_out_date" name="check_out_date" value = "<%= check_out %>"/>
+                                    <input type="hidden" id="people" name="people" value ="<%= people %>"/>
+                                    <input type="hidden" id="price" name="price" value ="<%= search_results[i].price %>"/>
+                                    <input type="hidden" id="amenities" name="amenities" value ="<%= search_results[i].amenities %>"/>
+                                    <input type="hidden" id="preference" name="preference" value ="<%= preference %>"/>
+                                    <input type="hidden" id="city" name="city" value ="<%= search_results[i].city %>"/>
+                                    <input type="hidden" id="address" name="address" value ="<%= search_results[i].hotel_address %>"/>
+
+                                    <input type="hidden" id="add_to_cart" value="abc"/>
+                                <button type="submit" class="btn btn-primary m-0">Book this!</button>
+                            </form>
+                            
+                        </div>
+                        <div class="row p-4">
+                            <form method="post" action="add_hotel_to_cart">
+                                <input type="hidden" id="roomId" name="roomId" value = "<%= search_results[i].roomId %>"/>
+                                <input type="hidden" id="hotelId" name="hotelId" value = "<%= search_results[i].hotelId %>"/>
+                                <input type="hidden" id="hotel_name" name="hotel_name" value = "<%= search_results[i].hotel_name %>"/>
+                                <input type="hidden" id="type" name="type" value = "<%= search_results[i].type %>"/>
+                                <input type="hidden" id="roomName" name="roomName" value = "<%= search_results[i].name %>"/>
+
+                                <input type="hidden" id="check_in_date" name="check_in_date" value = "<%= check_in %>"/>
+                                <input type="hidden" id="check_out_date" name="check_out_date" value = "<%= check_out %>"/>
+                                <input type="hidden" id="people" name="people" value ="<%= people %>"/>
+                                <input type="hidden" id="price" name="price" value ="<%= search_results[i].price %>"/>
+                                <input type="hidden" id="amenities" name="amenities" value ="<%= search_results[i].amenities %>"/>
+                                <input type="hidden" id="preference" name="preference" value ="<%= preference %>"/>
+                                <input type="hidden" id="city" name="city" value ="<%= search_results[i].city %>"/>
+                                <input type="hidden" id="address" name="address" value ="<%= search_results[i].hotel_address %>"/>
+
+                                    <input type="hidden" id="add_to_cart" value="abc"/>
+                                <button type="submit" class="btn btn-warning m-0">Add to cart</button>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+    <script>
+        var check_in_date = "";
+        var check_out_date = "";
+        function reset_date_native(date_field) {
+            // var date_input = document.getElementById('check_out');
+
+            //erase the input value
+            date_field.value = '';
+
+            //prevent error on older browsers (aka IE8)
+            if (date_field.type === 'date') {
+                //update the input content (visually)
+                date_field.type = 'text';
+                date_field.type = 'date';
+            }
+        }
+        function getReturnDate()
+        {
+            check_out_date_field = document.getElementById("check_out");
+            check_out_date = document.getElementById("check_out").value;
+            check_in_date = document.getElementById("check_in").value;
+            console.log("check_out date:",check_in_date);
+
+            if(check_in_date>check_out_date)
+            {
+                alert("Please select a proper date of check-out");
+                // Resetting the return date
+                reset_date_native(check_out_date_field)
+            }
+            else
+            {
+                localStorage.setItem("check_out_date",check_out_date);
+            }
+        }
+        function getTravelDate()
+        {
+            currentDate = new Date().toJSON().slice(0, 10);
+            check_in_date_field = document.getElementById("check_in");
+            check_out_date_field = document.getElementById("check_out");
+
+            check_in_date = check_in_date_field.value;
+            check_out_date = check_out_date_field.value;
+            if(check_out_date != '')
+            {
+                if(check_in_date>check_out_date)
+                {
+                    alert("Please select a proper date for check-in");
+                    // Resetting the return date
+                    reset_date_native(check_in_date_field)
+                }
+                
+            }
+            else if(currentDate > check_in_date)
+            {
+                alert("Please select a proper date for check-in");
+                // Resetting the return date
+                reset_date_native(check_in_date_field)
+            }
+            else
+            {
+                localStorage.setItem("check_in_date",check_in_date);
+            }
+           
+            // check_in_date_field.innerHTML = 'None';
+            console.log("check_in date:",check_in_date,"check_out date:",check_out_date,"current_date:",currentDate);
+        }
+
+        function checkPeopleNumber()
+        {
+            number_of_people = parseInt(document.getElementById("people").value);
+            people_field = document.getElementById("people");
+            if(number_of_people <= 0)
+            {
+                alert("Please enter the number of people.");
+                people_field.value = 0;
+            }
+        }
+
+        function getPreference()
+        {
+            selection = document.getElementById("selection");
+            console.log("Seleted preference:",selection.options[selection.selectedIndex].text);
+        }
+
+        function booking()
+        {
+            localStorage.setItem("room_id",check_out_date);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>

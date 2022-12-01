@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My bookings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .paymentinfo
+        {
+            background-color: #5DA7DB;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><h4>Travel & Stay</h4></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchflights">Book flights</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchhotels">Book hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchflights" onclick="setdouble()">Flights + hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="viewcart">My cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="mybookings">My bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="feedback">Give feedback</a>
+                    </li>
+                    
+                    
+                </ul>
+                <span class="align-middle mr-2">
+                    <a class="nav-link active" href="editprofile">
+                        <h1 class="display-4 fs-5 text-center ">Welcome, <%= user.username %> ✈️ <%= user.mileage %> miles&nbsp; </h1>
+                    </a>
+                </span>
+                    <a href="logout">
+                        <button class="btn btn-warning  ml-2" type="submit">Log out</button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div> 
+       
+    <div class="container-fluid mt-2">
+
+        <div class="row justify-content-center">
+            
+            <div class="col-12">
+                
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <h2>
+                        No bookings yet! Book flights and hotels.
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var check_in_date = "";
+        var check_out_date = "";
+        function reset_date_native(date_field) {
+            // var date_input = document.getElementById('check_out');
+
+            //erase the input value
+            date_field.value = '';
+
+            //prevent error on older browsers (aka IE8)
+            if (date_field.type === 'date') {
+                //update the input content (visually)
+                date_field.type = 'text';
+                date_field.type = 'date';
+            }
+        }
+        function getReturnDate()
+        {
+            check_out_date_field = document.getElementById("return_date");
+            check_out_date = document.getElementById("return_date").value;
+            check_in_date = document.getElementById("travel_date").value;
+            console.log("check_out date:",check_in_date);
+
+            if(check_in_date>check_out_date)
+            {
+                alert("Please select a proper date of check-out");
+                // Resetting the return date
+                reset_date_native(check_out_date_field)
+            }
+            else
+            {
+                localStorage.setItem("check_out_date",check_out_date);
+            }
+        }
+        function getTravelDate()
+        {
+            currentDate = new Date().toJSON().slice(0, 10);
+            check_in_date_field = document.getElementById("travel_date");
+            check_out_date_field = document.getElementById("return_date");
+
+            check_in_date = check_in_date_field.value;
+            check_out_date = check_out_date_field.value;
+            if(check_out_date != '')
+            {
+                if(check_in_date>check_out_date)
+                {
+                    alert("Please select a proper date for check-in");
+                    // Resetting the return date
+                    reset_date_native(check_in_date_field)
+                }
+                
+            }
+            else if(currentDate > check_in_date)
+            {
+                alert("Please select a proper date for check-in");
+                // Resetting the return date
+                reset_date_native(check_in_date_field)
+            }
+            else
+            {
+                localStorage.setItem("check_in_date",check_in_date);
+            }
+           
+            // check_in_date_field.innerHTML = 'None';
+            console.log("check_in date:",check_in_date,"check_out date:",check_out_date,"current_date:",currentDate);
+        }
+
+        function getPreference()
+        {
+            selection = document.getElementById("selection");
+            console.log("Seleted preference:",selection.options[selection.selectedIndex].text);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>

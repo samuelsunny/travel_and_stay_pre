@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Travel & Stay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .paymentinfo
+        {
+            background-color: #5DA7DB;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><h4>Travel & Stay</h4></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchflights">Book flights</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchhotels">Book hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchflights" onclick="setdouble()">Flights + hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="viewcart">My cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="mybookings">My bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="feedback">Give feedback</a>
+                    </li>
+                    
+                    
+                </ul>
+                <span class="align-middle mr-2">
+                    <a class="nav-link active" href="editprofile">
+                        <h1 class="display-4 fs-5 text-center ">Welcome, <%= user.username %> ✈️ <%= user.mileage %> miles&nbsp; </h1>
+                    </a>
+                </span>
+                    <a href="logout">
+                        <button class="btn btn-warning  ml-2" type="submit">Log out</button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div> 
+
+    <div class="container mt-1">
+
+        <div class="row justify-content-center">
+            
+            <div class="col-12">
+                <div class="card mt-1 p-2">
+                    <div class="card-body">
+                        <div class="row">
+                            
+                            <div class="col-6">
+                                <div class="row text-left">
+                                    <h4 class=" mb-2">Booking details</h4>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="username" class="form-label">Hotel Name</label>
+                                            <h4><%= booking_details.hotel_name %></h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="username" class="form-label">Type</label>
+                                            <h4><%= booking_details.type %></h4>
+                                        </div>
+                                    </div>     
+                                </div>
+                                
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="username" class="form-label">Amenities</label>
+                                            <h4><%= booking_details.amenities %></h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="username" class="form-label">City</label>
+                                            <h4><%= booking_details.city.charAt(0).toUpperCase() + booking_details.city.slice(1) %></h4>
+                                        </div>
+                                    </div>     
+                                </div>
+    
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="username" class="form-label">Check-in date:</label>
+                                            <h4><%= booking_details.check_in_date %></h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="username" class="form-label">Check-out date:</label>
+                                            <h4><%= booking_details.check_out_date %></h4>
+                                        </div>
+                                    </div>     
+                                </div>
+
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="username" class="form-label">Booking for:</label>
+                                            <h4><%= booking_details.people %></h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="username" class="form-label">Price:</label>
+                                            <h4>$<%= booking_details.price %></h4>
+                                        </div>
+                                        
+                                    </div>     
+                                </div>
+
+                                
+                            </div>
+                            <div class="col-6 ">
+                                <div class="card paymentinfo">
+                                    <div class="card-body">
+                                        <div class="row text-left">
+                                            <h4 class="text-white mb-4">Payment information</h4>
+                                        </div>
+                                        <label for="form-control" class="form-label text-white">Card details</label>
+                                        <div class="mb-4">
+                                            <input type="text" class="form-control"  id = "name_on_card" name = "name_on_card"  placeholder="Enter the name on the card" value="<%= user.name_on_card %>">
+                                        </div>
+                        
+                                        <div class="mb-4">
+                                            <input type="password" class="form-control" id = "card_number" name = "card_number" placeholder="Enter the card number" value="<%= user.card_number%>">
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control" id = "expiry_date" name = "expiry_date" placeholder="Card expiry date (MM/YY)" value="<%= user.expiry_date %>">
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="password" class="form-control" id = "cvv" name = "cvv" placeholder="CVV" value="<%= user.cvv %>">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-2">
+                                            <label for="billing_address" class="form-label text-white">Billing address</label>
+                                            <textarea class="form-control" id = "billing_address" name = "billing_address" rows="2" placeholder=""><%= user.billing_address %></textarea>
+                                        </div>
+                                    </div>
+                                  </div>
+                            </div>
+                           
+                        </div>
+             
+                        <div class="row text-center">
+                            <form method="post" action="book_room">
+                                <div id="sender">
+                                    <input type="hidden" id="roomId" name="roomId" value = "<%= booking_details.roomId %>"/>
+                                    <input type="hidden" id="roomName" name="roomName" value = "<%= booking_details.roomName %>"/>
+                                    <input type="hidden" id="hotel_name" name="hotel_name" value = "<%= booking_details.hotel_name %>"/>
+                                    <input type="hidden" id="type" name="type" value = "<%= booking_details.type %>"/>
+                                    <input type="hidden" id="hotelId" name="hotelId" value = "<%= booking_details.hotelId %>"/>
+                                    <input type="hidden" id="preference" name="preference" value = "<%= booking_details.preference %>"/>
+
+                                    <input type="hidden" id="check_in_date" name="check_in_date" value = "<%= booking_details.check_in_date %>"/>
+                                    <input type="hidden" id="check_out_date" name="check_out_date" value = "<%= booking_details.check_out_date %>"/>
+                                    <input type="hidden" id="city" name="city" value ="<%= booking_details.city %>"/>
+                                    <input type="hidden" id="amenities" name="amenities" value ="<%= booking_details.amenities %>"/>
+                                    <input type="hidden" id="address" name="address" value ="<%= booking_details.address %>"/>
+                                    <input type="hidden" id="price" name="price" value ="<%= booking_details.price %>"/>
+                                    <input type="hidden" id="people" name="people" value ="<%= booking_details.people %>"/>
+
+
+                                    <button type="submit" class="btn btn-success  mt-4" id="button" >Pay and book</button>
+                                </div>
+                            </form>
+                        </div>   
+                            
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        var return_date = "";
+        var travel_date = "";
+        function reset_date_native() {
+            var date_input = document.getElementById('return_date');
+
+            //erase the input value
+            date_input.value = '';
+
+            //prevent error on older browsers (aka IE8)
+            if (date_input.type === 'date') {
+                //update the input content (visually)
+                date_input.type = 'text';
+                date_input.type = 'date';
+            }
+        }
+        function getReturnDate()
+        {
+            return_date_field = document.getElementById("return_date");
+            return_date = document.getElementById("return_date").value;
+            travel_date = document.getElementById("travel_date").value;
+            if(travel_date>return_date)
+            {
+                alert("Please select a proper date of return");
+                // Resetting the return date
+                reset_date_native()
+            }
+        }
+        function getTravelDate()
+        {
+            travel_date_field = document.getElementById("travel_date");
+            travel_date = document.getElementById("travel_date").value;
+            // travel_date_field.innerHTML = 'None';
+            console.log("travel_date:",travel_date);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>
