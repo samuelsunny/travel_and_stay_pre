@@ -2240,10 +2240,10 @@ app.post("/buy_cart", async (req, res) => {
                     
                                     if( user.length != 0)
                                     {
-                                        miles = miles+ user[0].mileage;
+                                        miles = miles + user[0].mileage;
                                         console.log("  flight mileage:",miles,user[0].mileage);
                                     }
-                                    var added_mileage = flight_miles + parseInt(user[0]._doc.mileage);
+                                    var added_mileage = flight_miles + parseInt(miles);
                                     console.log("added miles:",added_mileage);
                                     var mileage = {mileage : String(added_mileage)}
                                     var updated_details = await User.findOneAndUpdate(
