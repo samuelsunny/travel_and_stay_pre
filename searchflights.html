@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search flights</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .paymentinfo
+        {
+            background-color: #5DA7DB;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-3">
+
+        <div class="row justify-content-center">
+            
+            <div class="col-12">
+                <div class="card mt-1">
+                    <div class="card-body">
+                        <form method = "post">
+                        <div class="row">
+                            
+                            <div class="col-3 m-2">
+                                <div class="row text-left">
+                                    <label for="user_name" class="form-label">From</label>
+                                    <input class="form-control me-2" type="search" placeholder="Departure city" aria-label="Departure city">
+                                </div>
+                            </div>
+                            <div class="col-3 m-2">
+                                <div class="row text-left">
+                                    <label for="user_name" class="form-label">To</label>
+                                    <input class="form-control me-2" type="search" placeholder="Destination city" aria-label="Destination city">
+                                </div>
+                            </div>
+                            <div class="col-2 m-2">
+                                <div class="row text-left">
+                                    <label for="user_name" class="form-label">Travel date</label>
+                                    <input class="form-control me-2" type="date" placeholder="Date of travel" aria-label="Date of travel">
+                                </div>
+                            </div>
+                            <div class="col-1 m-2">
+                                <div class="row text-left">
+                                    <label for="user_name" class="form-label">Travellers</label>
+                                    <input class="form-control me-2" type="number" placeholder="" aria-label="number_of_travellers">
+                                </div>
+                            </div>
+                            <div class="col-2 m-2">
+                                <div class="row text-left">
+                                    <label for="exampleDataList" class="form-label">Preferred class</label>
+                                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Select class">
+                                    <datalist id="datalistOptions">
+                                        <option value="Business">
+                                        <option value="Premium economy">
+                                        <option value="Economy">
+                                    </datalist>
+                                </div>
+                            </div>
+                        </div>   
+                        <div class="row justify-content-center bg-light">
+                            <div class="col-8 p-1">
+                                <div class="row text-center">
+                                    <div class="col-3 text-right">
+                                            <input class=" mt-3" type="checkbox" id="oneway" value="round_trip" onchange="displayDate()">
+                                            <label class="form-check-label" for="inlineCheckbox1">Round trip</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row ">
+                                            <div class="col-4 text-right">
+                                                <p class="mt-2">Return date</p>
+                                            </div>
+                                            <div class="col-8 text-left">
+                                                <input class="form-control me-2" type="date" placeholder="Date of return" id="departure_date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+
+                            
+                            
+                            
+                        <div class="row text-center">
+                            <div id="sender">
+                                <button type="submit" class="btn btn-success mb-2" id="button" onclick="reviewInfo()">Search for flights</button>
+                            </div>
+                        </div>   
+                            
+                        </form>
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        function displayDate()
+        {
+            oneway = document.getElementById("oneway");
+            roundtrip = document.getElementById("roundtrip");
+            roundtrip.checked = false;
+            console.log("oneway:",oneway.checked);
+            oneway_date = document.getElementById("oneway_date");
+            oneway_date.style.display="visible"; 
+        }
+        function displayRoundTripDate()
+        {
+            oneway = document.getElementById("oneway");
+            roundtrip = document.getElementById("roundtrip");
+            oneway.checked = false;
+            console.log("roundtrip:",roundtrip.value);
+        }
+        var checkAccountType = 0;
+        var  user_data       = {}
+        // the selector will match all input controls of type :checkbox
+        // and attach a click event handler 
+        $("input:checkbox").on('click', function() {
+        // in the handler, 'this' refers to the box clicked on
+        var $box = $(this);
+        if ($box.is(":checked")) {
+            // the name of the box is retrieved using the .attr() method
+            // as it is assumed and expected to be immutable
+            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            // the checked state of the group/box on the other hand will change
+            // and the current value is retrieved using .prop() method
+            $(group).prop("checked", false);
+            $box.prop("checked", true);
+        } else {
+            $box.prop("checked", false);
+        }
+        });
+
+        // function setexport()
+        // {
+        //     checkAccountType = 1;
+        //     console.log(checkAccountType," Export");
+        // }
+
+        // function setimport()
+        // {
+        //     checkAccountType = 0;
+        //     console.log(checkAccountType," Import");
+        // }
+
+        // function reviewInfo()
+        // {
+        //     button = document.getElementById('button');
+        //     buttonName = button.innerHTML
+            
+        //     username     = document.getElementById("username").value;
+        //     console.log(username);
+        //     password     = document.getElementById('password').value;
+        //     exporter_account = document.getElementById('exporter').value;
+        //     importer_account = document.getElementById('importer').value;
+        //     console.log(exporter_account,importer_account)
+        //     companyname  = document.getElementById('user_company_name').value;
+        //     address      = document.getElementById('user_company_address').value;
+        //     contactnumber= document.getElementById('user_contact_number').value;
+        //     console.log(checkAccountType)
+        //     if (checkAccountType == 1) {
+        //         account_type = "Exporter";
+        //         } 
+        //     else {
+        //     account_type = "Importer";
+        //     }
+        //     console.log("Exp/imp:",account_type)
+        //     p1 = document.getElementById('Username');
+        //     p2 = document.getElementById('Password');
+        //     p3 = document.getElementById('Account_type');
+        //     p4 = document.getElementById('Companyname');
+        //     p5 = document.getElementById('Address');
+        //     p6 = document.getElementById('Contactnumber');
+        //     button = document.getElementById('button');
+
+        //     p1.innerHTML = "Username: "+username;
+
+        //     p2.innerHTML = "Password: "+password;
+
+        //     p3.innerHTML = "Account type: "+account_type;
+
+        //     p4.innerHTML = "Company Name: "+companyname;
+
+        //     p5.innerHTML = "Address: "+address;
+
+
+        //     p6.innerHTML = "Contact number: "+"+"+contactnumber;
+
+        //     // button.innerHTML = "Submit"
+        //     // button.type      = "submit"
+        //         // user_data = {"userData":{
+        //         // "user_name"     : username,
+        //         // "password"     : password,
+        //         // "user_company" : companyname,
+        //         // "account_type" : account_type,
+        //         // "address"      : address+", "+landmark+", "+state+" - "+pincode,
+        //         // "status"       : "activate",
+        //         // "contactnumber": contactnumber
+        //         // }}
+
+        // }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add hotel management user</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .paymentinfo
+        {
+            background-color: #d75a16;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-3">
+
+        <div class="row justify-content-center">
+            
+            <div class="col-12">
+                <div class="card mt-1 p-2">
+                    <div class="card-body">
+                        <form method = "post" action="/addhoteluser">
+                        <div class="row">
+                            
+                            <div class="col-6">
+                                <div class="row text-left">
+                                    <h4 class=" mb-2">Hotel details</h4>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="username" class="form-label">Create your username</label>
+                                            <input type="text" class="form-control"  id = "username" name = "username"  placeholder="">                                        </div>
+                                        <div class="col-6">
+                                            <label for="password" class="form-label">Create your password</label>
+                                            <input type="password" class="form-control" id = "password" name = "password" placeholder="">                                        </div>
+                                    </div>     
+                                </div>
+                                
+                                <div class="mb-2">
+                                    <label for="name" class="form-label">Enter hotel name</label>
+                                    <input type="text" class="form-control" id = "name" name = "name" placeholder="">
+                                </div>
+    
+                                <div class="mb-2">
+                                    <label for="mailing_address" class="form-label">Enter mailing address</label>
+                                    <textarea class="form-control" id = "address" name = "address" rows="2"></textarea>
+                                </div>
+
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="username" class="form-label">City</label>
+                                            <input type="text" class="form-control"  id = "city" name = "city"  placeholder="">                                        </div>
+                                        <div class="col-6">
+                                            <label for="password" class="form-label">Country</label>
+                                            <input type="text" class="form-control" id = "country" name = "country" placeholder="">                                        </div>
+                                    </div>     
+                                </div>
+
+                                <div class="mb-2">
+                                    <input type="text" class="form-control" id = "contact_number" name = "contact_number" placeholder="Contact number">
+                                </div>
+                            </div>
+                            <div class="col-6 ">
+                                <div class="card paymentinfo">
+                                    <div class="card-body">
+                                        <div class="row text-left">
+                                            <h4 class="text-white mb-4">Payment information</h4>
+                                        </div>
+                                        <label for="form-control" class="form-label text-white">Card details</label>
+                                        <div class="mb-4">
+                                            <input type="text" class="form-control"  id = "name_on_card" name = "name_on_card"  placeholder="Enter the name on the card">
+                                        </div>
+                        
+                                        <div class="mb-4">
+                                            <input type="password" class="form-control" id = "card_number" name = "card_number" placeholder="Enter the card number">
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control" id = "expiry_date" name = "expiry_date" placeholder="Card expiry date (MM/YY)">
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="password" class="form-control" id = "cvv" name = "cvv" placeholder="CVV">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-2">
+                                            <label for="billing_address" class="form-label text-white">Billing address</label>
+                                            <textarea class="form-control" id = "billing_address" name = "billing_address" rows="2" placeholder=""></textarea>
+                                        </div>
+                                    </div>
+                                  </div>
+                            </div>
+                           
+                        </div>
+             
+                        <div class="row text-center">
+                            <div id="sender">
+                                <button type="submit" class="btn btn-success  mt-2" id="button" onclick="setToLowerCase()">Create account</button>
+                            </div>
+                        </div>   
+                            
+                        </form>
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        function setToLowerCase()
+        {
+            var city = document.getElementById("city");
+            console.log("Before lower case:", city.value);
+            var city_name = city.value.toLowerCase();
+            city.value = city_name;
+
+            var country = document.getElementById("country");
+            console.log("Before lower case:", country.value);
+            var country_name = country.value.toLowerCase();
+            country.value = country_name;
+            console.log("To lower case:", country.value);
+
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add flight</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .paymentinfo
+        {
+            background-color: #5DA7DB;
+        }
+        #addflightspage
+        {
+            background-color: #ffffff;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-3" id="addflightspage">
+
+        <div class="row justify-content-center p-4">
+            <div class="col-6">
+                <img src="addflights.jpg" class="img-fluid" alt="flight image">
+            </div>
+            
+            <div class="col-6">
+                <div class="card mt-1 p-2">
+                    <div class="card-body">
+                        <form method = "post" action="addflight">
+                        <div class="row">
+                            
+                            <div class="col-12">
+                                <div class="row text-left">
+                                    <h4 class=" mb-2">Add flight details</h4>
+                                </div>
+                                <div class="mb-2">
+                                    <label for="username" class="form-label">Enter flight number</label>
+                                    <input type="text" class="form-control"  id = "flightnumber" name = "flightnumber"  placeholder="">
+                                </div>
+                
+                                <div class="mb-2">
+                                    <label for="password" class="form-label">Enter flight name</label>
+                                    <input type="text" class="form-control" id = "flightname" name = "flightname" placeholder="">
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Enter departure airport</label>
+                                            <input type="text" class="form-control" id = "departure_airport" name = "departure_airport" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Enter arrival airport</label>
+                                            <input type="text" class="form-control" id = "arrival_airport" name = "arrival_airport" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Enter departure city</label>
+                                            <input type="text" class="form-control" id = "departure_city" name = "departure_city" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Enter arrival city</label>
+                                            <input type="text" class="form-control" id = "arrival_city" name = "arrival_city" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Enter departure date</label>
+                                            <input type="date" class="form-control" id = "departure_date" name = "departure_date" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Enter arrival date</label>
+                                            <input type="date" class="form-control" id = "arrival_date" name = "arrival_date" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Enter departure time</label>
+                                            <input type="time" class="form-control" id = "departure_time" name = "departure_time" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Enter arrival time</label>
+                                            <input type="time" class="form-control" id = "arrival_time" name = "arrival_time" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="mailing_address" class="form-label">Total business class seats</label>
+                                            <input type="text" class="form-control" id = "business_seats" name = "business_seats" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="mailing_address" class="form-label">Total economy class seats</label>
+                                            <input type="text" class="form-control" id = "economy_seats" name = "economy_seats" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="mailing_address" class="form-label">Business class seat price</label>
+                                            <input type="text" class="form-control" id = "business_seat_price" name = "business_seat_price" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="mailing_address" class="form-label">Economy class seat price</label>
+                                            <input type="text" class="form-control" id = "economy_seat_price" name = "economy_seat_price" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="miles" class="form-label">Enter the mileage in Miles</label>
+                                            <input type="number" class="form-control" id = "miles" name = "miles" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                           
+                        </div>
+             
+                        <div class="row text-center">
+                            <div id="sender">
+                                <button type="submit" class="btn btn-primary  mt-2" id="button" >Add flight</button>
+                            </div>
+                        </div>   
+                            
+                        </form>
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+        
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>

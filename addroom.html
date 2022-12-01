@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add hotel room</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .paymentinfo
+        {
+            background-color: #5DA7DB;
+        }
+        #addhotelspage
+        {
+            background-color: #c9eefe;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid p-5" id="addhotelspage">
+
+        <div class="row justify-content-center mt-5 p-5">
+            <div class="col-6">
+                <img src="room.jpg" class="img-fluid" alt="flight image">
+            </div>
+            
+            <div class="col-6">
+                <div class="card mt-3 p-2">
+                    <div class="card-body">
+                        <form method = "post" action="addroom"> 
+                        <div class="row">
+                            
+                            <div class="col-12">
+                                <div class="row text-left">
+                                    <h4 class=" mb-2">Add a room with details</h4>
+                                </div>
+                               
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Room name/Room no.</label>
+                                            <input type="text" class="form-control" id = "room_name" name = "room_name" placeholder="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Price</label>
+                                            <input type="text" class="form-control" id = "room_price" name = "room_price" placeholder="">
+                                        </div>
+                                    </div>                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-2">
+                                            <label for="name" class="form-label">Amenities</label>
+                                            <textarea class="form-control" id = "amenities" name = "amenities" rows="3"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row text-center">
+                                    <div id="sender">
+                                        <button type="submit" class="btn btn-success  mt-1" id="button">Add room</button>
+                                    </div>
+                                </div>   
+                            </div>
+                            
+                        </div>    
+                        </form>
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>
