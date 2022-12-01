@@ -2331,7 +2331,13 @@ app.post("/checkout_cart", async (req, res) => {
                 for (let i = 0; i < results.length; i++) {
                     cart_items[i] = JSON.parse(results[i]._doc.details);
                     cart_item_details = JSON.parse(results[i]._doc.details);
-                    total_cost += parseInt(cart_item_details.price)*parseInt(cart_item_details.passengers);
+                    if(cart_items[i].type == "flight_ticket")
+                    {
+                        total_cost += parseInt(cart_item_details.price)*parseInt(cart_item_details.passengers);
+                    }
+                    else{
+                        total_cost += parseInt(cart_item_details.price);
+                    }
                 }
                 if(user_miles >= 500)
                 {
