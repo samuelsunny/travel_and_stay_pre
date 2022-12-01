@@ -142,7 +142,7 @@ app.post("/login", (req, res) => {
             console.log("Error part:",err);
             res.status(500).send();
         }
-        console.log("After err:",user,user._doc);
+        // console.log("After err:",user,user._doc);
         // console.log(user._doc.username == username);
         if( user && user._doc.username == username)
         {
@@ -1486,7 +1486,8 @@ app.post("/book_flight", (req, res) => {
                 item_id     : flight_id,
                 details     : JSON.stringify(flight_details)
             }
-            console.log("booking:",cart_item);
+            // console.log("booking:",cart_item);
+            var miles = 0;
             Booking.find({details: JSON.stringify(flight_details), userId : req.session.user._id},function(err,results){
                 if(err)
                 {
@@ -1510,10 +1511,10 @@ app.post("/book_flight", (req, res) => {
         
                         if( user.length != 0)
                         {
-                            var miles = user[0].mileage;
+                            miles = miles + user[0].mileage;
                             console.log("  flight mileage:",miles,user[0].mileage);
                         }
-                        var added_mileage = add_mileage + parseInt(user[0]._doc.mileage);
+                        var added_mileage = add_mileage + parseInt(miles);
                         console.log("added miles:",added_mileage);
                         var mileage = {mileage : String(added_mileage)}
                         var updated_details = await User.findOneAndUpdate(
@@ -1524,7 +1525,7 @@ app.post("/book_flight", (req, res) => {
                             { new: true }
                           );
                         console.log("just miles:",updated_details); 
-                    await Cart.deleteOne({ details: JSON.stringify(data)});
+                    await Cart.deleteOne({ details: JSON.stringify(flight_details)});
                     res.sendFile(__dirname + "/success_booking.html");
                 });
             }
@@ -1562,7 +1563,13 @@ app.get("/viewcart", (req, res) => {
                         for (let i = 0; i < results.length; i++) {
                             cart_items[i] = JSON.parse(results[i]._doc.details);
                             cart_item_details = JSON.parse(results[i]._doc.details);
-                            total_cost += parseInt(cart_item_details.price)*parseInt(cart_item_details.passengers);
+                            if(cart_items[i].type == "flight_ticket")
+                            {
+                                total_cost += parseInt(cart_item_details.price)*parseInt(cart_item_details.passengers);
+                            }
+                            else{
+                                total_cost += parseInt(cart_item_details.price);
+                            }
                         }
                         // console.log("Rooms:",rooms);
                         console.log("Total items:",cart_items)
@@ -2258,12 +2265,12 @@ app.post("/buy_cart", async (req, res) => {
 
                                 });
                                 // checker = checker+ 1;
-                            
+                            if(checker > 0)
+                            {
+                                res.sendFile(__dirname + "/flight_in_cart.html");  
+                            }        
                     }
-                    if(checker > 0)
-                    {
-                        res.sendFile(__dirname + "/flight_in_cart.html");  
-                    }
+                    
                 }
                 
 

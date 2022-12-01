@@ -59,6 +59,48 @@
     </style>
   </head>
   <body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><h4>Travel & Stay</h4></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchflights">Book flights</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchhotels">Book hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="searchflights" onclick="setdouble()">Flights + hotels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="viewcart">My cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="mybookings">My bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="feedback">Give feedback</a>
+                    </li>
+                    
+                    
+                </ul>
+                <span class="align-middle mr-2">
+                    <a class="nav-link active" href="editprofile">
+                        <h1 class="display-4 fs-5 text-center ">Welcome, <%= user.username %> ✈️ <%= user.mileage %> miles&nbsp; </h1>
+                    </a>
+                </span>
+                    <a href="logout">
+                        <button class="btn btn-warning  ml-2" type="submit">Log out</button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
     <div class="container mt-3" id="addflightspage">
 
         <div class="row justify-content-center p-4">
