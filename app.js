@@ -2158,6 +2158,7 @@ app.post("/buy_cart", async (req, res) => {
                 // console.log("Rooms:",rooms);
                 console.log("Total checkout items:",cart_items)
                 var checker = 0;
+                var miles = 0;
                 for (let j = 0; j < cart_items.length; j++) {
                     if(cart_items[j].type != "flight_ticket")
                     {
@@ -2206,7 +2207,7 @@ app.post("/buy_cart", async (req, res) => {
                     }
                     else
                     {
-                        var miles = 0;
+                        
                         console.log("Inside buy_tickets_checkout");
                         var flight_miles = parseInt(cart_items[j].miles);
                         var flight_id = cart_items[j].flight_id;
@@ -2240,8 +2241,8 @@ app.post("/buy_cart", async (req, res) => {
                     
                                     if( user.length != 0)
                                     {
-                                        miles = miles + user[0].mileage;
-                                        console.log("  flight mileage:",miles,user[0].mileage);
+                                        miles =  miles + user[0].mileage;
+                                        console.log("  flight mileage:",miles,user[0]);
                                     }
                                     var added_mileage = flight_miles + parseInt(miles);
                                     console.log("added miles:",added_mileage);
