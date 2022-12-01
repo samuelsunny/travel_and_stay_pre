@@ -2264,6 +2264,11 @@ app.post("/buy_cart", async (req, res) => {
                                 checker = checker+ 1;
                             }
 
+                            if(checker > 0)
+                            {
+                                res.sendFile(__dirname + "/flight_in_cart.html");  
+                            }   
+
                                 });
                                 // checker = checker+ 1;
                             if(checker > 0)
